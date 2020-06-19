@@ -1,5 +1,5 @@
 ---
-title: Download this Theme
+title: Meta Sezgisel ve Arama Algoritması
 updated: 2015-09-09 10:38
 ---
 
