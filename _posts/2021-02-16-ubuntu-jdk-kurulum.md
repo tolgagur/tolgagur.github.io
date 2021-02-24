@@ -16,7 +16,6 @@ sudo dpkg -i jdk-15.0.2_linux-x64_bin.deb
 
 Kurduğumuz sürümü derleyicimizde kullanmamız için `sudo update-alternatives` 'den yararlanmamız gerekiyor.
 Eğer istediğiniz sürümde değilseniz alttaki komut yardımıyla seçim yapabilirsiniz:
-
 ```linux
 sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-15.0.2/bin/java 1
 ```
