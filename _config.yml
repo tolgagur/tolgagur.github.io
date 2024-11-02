@@ -1,10 +1,9 @@
 # Site settings
-title: Klise Theme # site title
+title: Tolga Gur # site title
 description: >- # site description
-  He's writing in Bahasa about web technology and experience as a journal 
-  for documentation things that he learned, meet him <a href="https://github.com/piharpi" target="_blank" rel="noopener">@github</a>.
+  What can I do sometimes.
 lang: en-US # default lang
-timezone: Asia/Jakarta # set your timezone
+timezone: Asia/Istanbul # set your timezone
 image: assets/img/ogp.png # This image used for Open Graph more info https://ogp.me/
 repo: https://github.com/piharpi/jekyll-klise # site repo [optional]
 mode: dark # default theme "dark" | "light"
@@ -13,8 +12,7 @@ mode: dark # default theme "dark" | "light"
 author:
   name: Tolga Gur # author name
   bio: >- # tell to the world
-    The minimalist Jekyll theme, light and dark mode support, for running a personal site and blog, 
-    meet Klisé theme at <a href="https://github.com/piharpi/jekyll-klise" target="_blank" rel="noopener">@github</a>.
+    What can I do sometimes.
   username: tolgagur # general username
   github: tolgagur # github username
   twitter: twitter_username # twitter username
@@ -23,7 +21,7 @@ author:
   avatar: /assets/img/avatar.jpg # change with your own avatar
 
 # URL settings
-url: "https://klise.now.sh" #
+url: "https://tolgagur.github.io" #
 baseurl: 
 permalink: /:title/
 google_analytics: # leave it blank if not wish
