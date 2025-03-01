@@ -9,7 +9,7 @@ toc: true
 
 # Java Virtual Machine (JVM): Modern Bir Bakış
 
-> "JVM, Java ekosisteminin kalbidir. Modern yazılım dünyasında performans ve güvenilirliğin sembolü haline gelmiştir."
+JVM, Java platformunun temel yapı taşıdır. Platform bağımsız çalışma, güvenlik, otomatik bellek yönetimi ve yüksek performans özellikleriyle modern yazılım geliştirmenin vazgeçilmez bir parçasıdır.
 
 ## Hızlı Başlangıç
 
@@ -67,62 +67,57 @@ JVM mimarisi, karmaşık ve çok katmanlı bir yapıya sahiptir. Her bileşen ö
 
 ```ascii
 +---------------------------------------------------+
-|                  JAVA PROGRAMI                     |
+|                  JAVA PROGRAMI                    |
 +---------------------------------------------------+
-                        |
-                        v
+                        ↓
 +---------------------------------------------------+
-|                  CLASS LOADER                       |
-|                                                    |
-|    [Bootstrap] --> [Extension] --> [Application]   |
-|                                                    |
+|                  CLASS LOADER                     |
+|                                                   |
+|    [Bootstrap] --> [Extension] --> [Application]  |
+|                                                   |
 +---------------------------------------------------+
-                        |
-                        v
+                        ↓  
 +---------------------------------------------------+
-|              RUNTIME DATA AREAS                     |
-|                                                    |
-|    +---------------+        +-----------------+    |
-|    | Method Area   |        |      Heap       |    |
-|    |               |        |                 |    |
-|    | * Metadata    |        | Young Gen       |    |
-|    | * Statics     |        | * Eden Space    |    |
-|    | * Constants   |        | * Survivor      |    |
-|    +---------------+        |                 |    |
-|                            | Old Gen          |    |
-|    +---------------+       +-----------------+    |
-|    |    Stack      |                             |
-|    | * Per-Thread  |       +-----------------+   |
-|    | * LIFO        |       |  Native Stack    |   |
-|    +---------------+       +-----------------+   |
-|                                                    |
+|              RUNTIME DATA AREAS                   |
+|                                                   |
+|    +---------------+        +-----------------+   |
+|    | Method Area   |        |      Heap       |   |
+|    |               |        |                 |   |
+|    | * Metadata    |        | Young Gen       |   |
+|    | * Statics     |        | * Eden Space    |   |
+|    | * Constants   |        | * Survivor      |   |
+|    +---------------+        |                 |   |
+|                             | Old Gen         |   |
+|    +---------------+        +-----------------+   |
+|    |    Stack      |                              |
+|    | * Per-Thread  |        +-----------------+   |
+|    | * LIFO        |        |  Native Stack   |   |
+|    +---------------+        +-----------------+   |
+|                                                   |
 |    [PC Registers - Her Thread İçin]               |
-|                                                    |
+|                                                   |
 +---------------------------------------------------+
-                        |
-                        v
+                        ↓
 +---------------------------------------------------+
-|               EXECUTION ENGINE                      |
-|                                                    |
-|    [Interpreter]            [JIT Compiler]         |
+|               EXECUTION ENGINE                    |
+|                                                   |
+|    [Interpreter]            [JIT Compiler]        |
 |    * Bytecode              * Optimizasyon         |
-|    * Satır-satır          * Native kod           |
-|                                                    |
+|    * Satır-satır           * Native kod           |
+|                                                   |
 |    +----------------------------------------+     |
-|    |           Garbage Collector             |     |
+|    |           Garbage Collector            |     |
 |    |  G1 | ZGC | Shenandoah | Serial        |     |
 |    +----------------------------------------+     |
-|                                                    |
+|                                                   |
 +---------------------------------------------------+
-                        |
-                        v
+                        ↓
 +---------------------------------------------------+
-|            NATIVE METHOD INTERFACE                  |
+|            NATIVE METHOD INTERFACE                |
 +---------------------------------------------------+
-                        |
-                        v
+                        ↓
 +---------------------------------------------------+
-|               İŞLETİM SİSTEMİ                      |
+|               İŞLETİM SİSTEMİ                     |
 +---------------------------------------------------+
 ```
 
