@@ -41,40 +41,128 @@ public class Merhaba {
 
 ## JVM Mimarisi
 
-JVM'in temel bileşenleri şunlardır:
+JVM mimarisi üç ana bileşenden oluşur ve her bileşenin kendi özel görevi vardır:
 
-1. **Class Loader Subsystem**
-2. **Runtime Data Areas**
-3. **Execution Engine**
-4. **Native Method Interface**
+### 1. Class Loader Subsystem (Sınıf Yükleme Alt Sistemi)
+- **Bootstrap Class Loader**: Java'nın çekirdek sınıflarını yükler (rt.jar)
+- **Extension Class Loader**: Java'nın ek özellik sınıflarını yükler (ext/*.jar)
+- **Application Class Loader**: Uygulama sınıflarını yükler (classpath)
 
+### 2. Runtime Data Areas (Çalışma Zamanı Veri Alanları)
+- **Method Area (Metod Alanı)**
+  - Sınıf yapıları
+  - Metod kodları
+  - Statik değişkenler
+  
+- **Heap (Yığın)**
+  - Tüm nesneler ve diziler
+  - Garbage Collection burada çalışır
+  
+- **Stack (Yığıt)**
+  - Her thread için ayrı stack
+  - Metod çağrıları
+  - Yerel değişkenler
+  
+- **PC Registers**
+  - Thread'lerin çalıştığı kodun konumu
+  
+- **Native Method Stack**
+  - Native (C/C++) kod çağrıları için
+
+### 3. Execution Engine (Yürütme Motoru)
+- **Interpreter (Yorumlayıcı)**
+  - Bytecode'u satır satır yorumlar
+  - Yavaş ama basit çalışır
+  
+- **JIT Compiler**
+  - Sık kullanılan kodu native koda çevirir
+  - Hızlı çalışma sağlar
+  
+- **Garbage Collector**
+  - Kullanılmayan nesneleri temizler
+  - Bellek yönetimini otomatikleştirir
+
+```ascii
++----------------------------------+
+|        Class Loader System       |
+|  +----------+ +-------+ +------+ |
+|  |Bootstrap | |  Ext  | | App  | |
+|  +----------+ +-------+ +------+ |
++----------------------------------+
+               ↓
++----------------------------------+
+|      Runtime Data Areas          |
+| +--------------------------------+
+| |        Method Area            ||
+| |   (Class Data, Static Vars)   ||
+| +--------------------------------+
+| +--------------------------------+
+| |            Heap               ||
+| |     (Objects & Arrays)        ||
+| +--------------------------------+
+| +--------------------------------+
+| |     Stack     |  PC Register  ||
+| |  (Per Thread) | (Per Thread)  ||
+| +--------------------------------+
++----------------------------------+
+               ↓
++----------------------------------+
+|       Execution Engine           |
+| +------------+ +---------------+ |
+| |Interpreter | | JIT Compiler  | |
+| +------------+ +---------------+ |
+| +--------------------------------+
+| |      Garbage Collector        ||
+| +--------------------------------+
++----------------------------------+
 ```
-+------------------------+
-|     Class Loader      |
-+------------------------+
-          ↓
-+------------------------+
-|   Runtime Data Areas   |
-| +--------------------+ |
-| |    Method Area    | |
-| +--------------------+ |
-| |       Heap        | |
-| +--------------------+ |
-| |    Java Stacks    | |
-| +--------------------+ |
-| |    PC Registers   | |
-| +--------------------+ |
-+------------------------+
-          ↓
-+------------------------+
-|   Execution Engine    |
-| +------------------+ |
-| |  JIT Compiler   | |
-| +------------------+ |
-| |  Interpreter    | |
-| +------------------+ |
-+------------------------+
+
+### JVM'in Çalışma Akışı:
+
+1. Java kaynak kodu (.java) → Bytecode'a (.class) derlenir
+2. Class Loader gerekli sınıfları yükler
+3. Bytecode Execution Engine tarafından yorumlanır
+4. Sık kullanılan kodlar JIT ile optimize edilir
+5. Garbage Collector otomatik bellek yönetimi yapar
+
+### Örnek:
+
+```java
+public class JVMOrnek {
+    // Method Area'da saklanır
+    static int sayac = 0;
+    
+    // Heap'te saklanır
+    String mesaj;
+    
+    public JVMOrnek(String mesaj) {
+        // Stack'te yerel değişken
+        this.mesaj = mesaj;  // Heap'teki referans
+        sayac++;  // Method Area'daki statik değişken
+    }
+    
+    public void goster() {
+        // Stack'te yerel değişken
+        String bilgi = "Mesaj " + sayac + ": " + mesaj;
+        System.out.println(bilgi);
+    }
+    
+    public static void main(String[] args) {
+        // Her nesne Heap'te oluşturulur
+        JVMOrnek ornek1 = new JVMOrnek("Merhaba");
+        JVMOrnek ornek2 = new JVMOrnek("Dünya");
+        
+        ornek1.goster();  // Stack'te metod çağrısı
+        ornek2.goster();
+    }
+}
 ```
+
+Bu örnekte:
+- Statik `sayac` değişkeni Method Area'da
+- `ornek1` ve `ornek2` nesneleri Heap'te
+- `main` ve `goster` metodları Stack'te
+- String literals ("Merhaba", "Dünya") String Pool'da (Heap'in özel bir bölümü)
 
 ## Bellek Yönetimi
 
